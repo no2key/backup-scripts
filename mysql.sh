@@ -16,7 +16,7 @@ do
                 continue
         fi
 
-        FILE="${DB}_`date +'%Y-%m-%d_%H-%M-%S'`.sql"
+        FILE="${DB}_`date +'%Y-%m-%d_%H-%M-%S'`.sql.gz"
         echo $FILE
         mysqldump -u root -p${MYSQL_PASSWORD} ${DB} | gzip > /backup/mysql/${FILE}
         s3cmd -c /backup/s3cfg put /backup/mysql/${FILE} s3://${BUCKET}/${PREFIX}/mysql/${FILE}
